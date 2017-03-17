@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 import main.Main;
 
 public class Canvas {
-	
+	public static JPanel panel;
 	private static void repainter (Graphics g){
     	for(int i = 0; i < Main.spriteBuffer.length; i++){
     		g.setColor(Main.spriteBuffer[i].color);
@@ -22,8 +22,7 @@ public class Canvas {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
         frame.setSize(600, 400);
-
-        JPanel panel = new JPanel() {
+        panel = new JPanel() {
             public void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 repainter(g);

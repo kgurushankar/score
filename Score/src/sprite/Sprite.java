@@ -2,13 +2,16 @@ package sprite;
 
 import java.awt.Color;
 
+import core.Canvas;
+
 public class Sprite {
 	public int x = 0;
 	public int y = 0;
 	public int width = 100;
 	public int height = 100;
 	public Color color = Color.BLUE;
-	public Sprite (Color c){
+	/*Constructors and other stuff you don't care about*/
+	public Sprite (){
 		
 	}
 	public Sprite(int xpos, int ypos, int w, int h, Color c) {
@@ -17,5 +20,10 @@ public class Sprite {
 		width = w;
 		height = h;
 		color = c;
+	}
+	public void moveTo(int xpos, int ypos){
+		x = xpos;
+		y = ypos;
+		Canvas.panel.repaint();
 	}
 }
