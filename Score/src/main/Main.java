@@ -7,7 +7,7 @@ import sprite.Sprite;
 
 public class Main {
 	
-	public static Sprite sprite1 = new Sprite(100,100,100,100, Color.RED);
+	public static Sprite sprite1 = new Sprite(100,100,100,100);
 	public static void main(String[] args) throws InterruptedException {
 		Canvas.startCanvas();
 		Sprite sprite2 = new Sprite();

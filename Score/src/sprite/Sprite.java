@@ -16,12 +16,11 @@ public class Sprite {
 	public Sprite (){
 		spriteBuffer = util.main.push(spriteBuffer, this);
 	}
-	public Sprite(int xpos, int ypos, int w, int h, Color c) {
+	public Sprite(int xpos, int ypos, int w, int h) {
 		x = xpos;
 		y = ypos;
 		width = w;
 		height = h;
-		color = c;
 		spriteBuffer = util.main.push(spriteBuffer, this);
 	}
 	public void moveTo(int xpos, int ypos){
