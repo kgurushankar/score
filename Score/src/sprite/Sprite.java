@@ -6,7 +6,7 @@ import util.*;
 import core.Canvas;
 
 public class Sprite {
-	static Sprite[] spriteBuffer = new Sprite[0];
+	public static Sprite[] spriteBuffer = new Sprite[0];
 	public int x = 0;
 	public int y = 0;
 	public int width = 100;

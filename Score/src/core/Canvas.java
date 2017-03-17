@@ -7,13 +7,14 @@ import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import main.Main;
+import sprite.Sprite;
 
 public class Canvas {
 	public static JPanel panel;
 	private static void repainter (Graphics g){
-    	for(int i = 0; i < Main.spriteBuffer.length; i++){
-    		g.setColor(Main.spriteBuffer[i].color);
-    		g.fillRect(Main.spriteBuffer[i].x, Main.spriteBuffer[i].y, Main.spriteBuffer[i].width, Main.spriteBuffer[i].height);
+    	for(int i = 0; i < Sprite.spriteBuffer.length; i++){
+    		g.setColor(Sprite.spriteBuffer[i].color);
+    		g.fillRect(Sprite.spriteBuffer[i].x, Sprite.spriteBuffer[i].y, Sprite.spriteBuffer[i].width, Sprite.spriteBuffer[i].height);
     	}
     }
 	public static void startCanvas() {
