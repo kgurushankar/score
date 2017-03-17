@@ -1,7 +1,8 @@
 package sprite;
 
 import java.awt.Color;
-
+import main.Main;
+import util.*;
 import core.Canvas;
 
 public class Sprite {
@@ -12,7 +13,7 @@ public class Sprite {
 	public Color color = Color.BLUE;
 	/*Constructors and other stuff you don't care about*/
 	public Sprite (){
-		
+		Main.spriteBuffer = util.main.push(Main.spriteBuffer, this);
 	}
 	public Sprite(int xpos, int ypos, int w, int h, Color c) {
 		x = xpos;
@@ -20,6 +21,7 @@ public class Sprite {
 		width = w;
 		height = h;
 		color = c;
+		Main.spriteBuffer = util.main.push(Main.spriteBuffer, this);
 	}
 	public void moveTo(int xpos, int ypos){
 		x = xpos;
