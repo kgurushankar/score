@@ -6,7 +6,7 @@ import core.Canvas;
 import sprite.Sprite;
 
 public class Main {
-	public static Sprite[] spriteBuffer = new Sprite[0];
+	
 	public static Sprite sprite1 = new Sprite(100,100,100,100, Color.RED);
 	public static void main(String[] args) throws InterruptedException {
 		Canvas.startCanvas();
