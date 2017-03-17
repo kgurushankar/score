@@ -17,7 +17,6 @@ public class Sprite {
 	public int y = 0;
 	public int width = 100;
 	public int height = 100;
-	public Color color = Color.BLUE;
 	public String image = "test.jpg";
 	/*Constructors and other stuff you don't care about*/
 	public Sprite (){
