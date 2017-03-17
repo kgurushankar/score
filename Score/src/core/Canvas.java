@@ -13,8 +13,7 @@ public class Canvas {
 	public static JPanel panel;
 	private static void repainter (Graphics g){
     	for(int i = 0; i < Sprite.spriteBuffer.length; i++){
-    		g.setColor(Sprite.spriteBuffer[i].color);
-    		g.fillRect(Sprite.spriteBuffer[i].x, Sprite.spriteBuffer[i].y, Sprite.spriteBuffer[i].width, Sprite.spriteBuffer[i].height);
+    		g.drawImage(Sprite.readImage(Sprite.spriteBuffer[i].image), Sprite.spriteBuffer[i].x, Sprite.spriteBuffer[i].y, null);
     	}
     }
 	public static void startCanvas() {
