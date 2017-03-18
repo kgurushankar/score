@@ -2,7 +2,7 @@ package main;
 
 import core.Canvas;
 import sprite.Sprite;
-
+/*This is a sample method that is used for testing. Feel free to study it if you need help!*/
 public class Main {
 	public static void main(String[] args){
 		Canvas.startCanvas();
