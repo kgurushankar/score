@@ -4,10 +4,11 @@ import core.Canvas;
 import sprite.Sprite;
 
 public class Main {
-	
 	public static void main(String[] args) throws InterruptedException {
 		Canvas.startCanvas();
 		Sprite sprite1 = new Sprite();
+		sprite1.width = 200;
+		sprite1.height = 200;
 		Thread.sleep(100);
 		while(true){
 			sprite1.goTo(0,0);

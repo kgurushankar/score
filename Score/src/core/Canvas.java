@@ -1,19 +1,15 @@
 package core;
-import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Graphics;
 
-import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import main.Main;
 import sprite.Sprite;
 
 public class Canvas {
 	public static JPanel panel;
 	private static void repainter (Graphics g){
     	for(int i = 0; i < Sprite.spriteBuffer.length; i++){
-    		g.drawImage(Sprite.readImage(Sprite.spriteBuffer[i].image),Sprite.spriteBuffer[i].x, Sprite.spriteBuffer[i].y, Sprite.spriteBuffer[i].width, Sprite.spriteBuffer[i].height, null);
+    		g.drawImage(Sprite.spriteBuffer[i].image,Sprite.spriteBuffer[i].x, Sprite.spriteBuffer[i].y, Sprite.spriteBuffer[i].width, Sprite.spriteBuffer[i].height, null);
     	}
     }
 	public static void startCanvas() {
