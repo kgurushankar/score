@@ -5,7 +5,7 @@ import javax.swing.JPanel;
 
     public class Listener {
     	public static String keypressed = "";
-        public static void start(Canvas canvas) throws Exception {
+        public static void start(Canvas canvas){
         	JPanel listenerPanel = new JPanel();
         	listenerPanel.addKeyListener(new Keychecker());
         	canvas.frame.add(listenerPanel);
@@ -18,8 +18,11 @@ import javax.swing.JPanel;
 
     class Keychecker extends KeyAdapter {
         @Override
-        public void keyPressed(KeyEvent event) {
+     public void keyPressed(KeyEvent event) {
         char ch = event.getKeyChar();
         Listener.keypressed = Character.toString(event.getKeyChar());
+     }
+     public void keyReleased(KeyEvent event) {
+    	 Listener.keypressed = "";
      }
 }   

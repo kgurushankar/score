@@ -29,6 +29,8 @@ public class Canvas {
         frame.add(panel);
         frame.validate(); // because you added panel after setVisible was called
         frame.repaint(); // because you added panel after setVisible was called
+        Listener.start(this); //Starts up the keylistener
+        frame.repaint();
     }
 }
 

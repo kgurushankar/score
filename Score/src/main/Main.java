@@ -12,12 +12,6 @@ public class Main {
 		sprite1.width = 200;
 		sprite1.height = 200;
 		sleep(100);
-		try {
-			Listener.start(canvas);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		while(true){
 			if(Listener.keypressed.equals("w")){
 				sprite1.y--;
@@ -31,7 +25,7 @@ public class Main {
 			if(Listener.keypressed.equals("d")){
 				sprite1.x++;
 			}
-			sleep(10);
+			sleep(1);
 			Canvas.panel.repaint();
 		}
 	}
