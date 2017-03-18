@@ -1,6 +1,7 @@
 package sprite;
 
 import java.awt.Image;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -41,4 +42,5 @@ public class Sprite {
 		    ex.printStackTrace();
 		}
 	}
+	
 }

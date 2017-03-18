@@ -2,6 +2,7 @@ package main;
 
 import core.Canvas;
 import sprite.Sprite;
+import core.Listener;
 
 public class Main {
 	/*This is the most unstable version of score. I wouldn't recommend using it!*/
@@ -11,15 +12,27 @@ public class Main {
 		sprite1.width = 200;
 		sprite1.height = 200;
 		sleep(100);
+		try {
+			Listener.start(canvas);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		while(true){
-			sprite1.goTo(0,0);
-			sleep(100);
-			sprite1.goTo(100, 0);
-			sleep(100);
-			sprite1.goTo(100, 100);
-			sleep(100);
-			sprite1.goTo(0, 100);
-			sleep(100);
+			if(Listener.keypressed.equals("w")){
+				sprite1.y--;
+			}
+			if(Listener.keypressed.equals("a")){
+				sprite1.x--;
+			}
+			if(Listener.keypressed.equals("s")){
+				sprite1.y++;
+			}
+			if(Listener.keypressed.equals("d")){
+				sprite1.x++;
+			}
+			sleep(10);
+			Canvas.panel.repaint();
 		}
 	}
 	public static void sleep(int millis){
