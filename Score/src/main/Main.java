@@ -1,7 +1,5 @@
 package main;
 
-import java.awt.Color;
-
 import core.Canvas;
 import sprite.Sprite;
 
