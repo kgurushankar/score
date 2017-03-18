@@ -9,8 +9,8 @@ public class Main {
 	public static void main(String[] args){
 		Canvas canvas = new Canvas("Demo",1000,1000);
 		Sprite sprite1 = new Sprite();
-		sprite1.width = 200;
-		sprite1.height = 200;
+		sprite1.width = 100;
+		sprite1.height = 100;
 		sleep(100);
 		while(true){
 			if(Listener.keypressed.equals("w")&&sprite1.y>=700){
