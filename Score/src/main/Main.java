@@ -4,6 +4,7 @@ import core.Canvas;
 import sprite.Sprite;
 
 public class Main {
+	/*This is the most unstable version of score. I wouldn't recommend using it!*/
 	public static void main(String[] args){
 		Canvas.startCanvas();
 		Sprite sprite1 = new Sprite();
