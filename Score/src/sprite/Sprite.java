@@ -13,12 +13,16 @@ public class Sprite {
 	public int y = 0;
 	public int width = 100;
 	public int height = 100;
-	public String path = "test.jpg";
+	public String path = "Scratch_Cat.png";
 	public Image image;
+	public Image[] costumes = new Image[2];
+	
+	private int imageLocation = 0;
 	/*Constructors and other stuff you don't care about*/
 	public Sprite (){
 		spriteBuffer = util.main.push(spriteBuffer, this);
-		this.readImage(path);
+		image = this.readImage(path);
+		costumes[0] = image;
 	}
 	public Sprite(int xpos, int ypos, int w, int h) {
 		x = xpos;
@@ -26,21 +30,33 @@ public class Sprite {
 		width = w;
 		height = h;
 		spriteBuffer = util.main.push(spriteBuffer, this);
-		this.readImage(path);
+		image = this.readImage(path);
+		costumes[0] = image;
 	}
 	public void goTo(int xpos, int ypos){
 		x = xpos;
 		y = ypos;
 		Canvas.panel.repaint();
 	}
-	public void readImage(String path){
+	public void nextCostume(){
+		if(imageLocation == costumes.length - 1){
+			imageLocation = 0;
+			image = costumes[0];
+		}
+		else{
+			imageLocation++;
+			image = costumes[imageLocation];
+		}
+	}
+	public Image readImage(String path){
 		try {
 		    File pathToFile = new File(path);
 		    Image out = ImageIO.read(pathToFile);
-		    image = out;
+		    return out;
 		} catch (IOException ex) {
 		    ex.printStackTrace();
 		}
+		return null;
 	}
 	
 }

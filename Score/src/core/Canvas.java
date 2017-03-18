@@ -1,4 +1,5 @@
 package core;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 
@@ -11,6 +12,8 @@ public class Canvas {
 	public static JPanel panel;
 	private static void repainter (Graphics g){
     	for(int i = 0; i < Sprite.spriteBuffer.length; i++){
+    		g.setColor(Color.WHITE);
+    		g.fillRect(0, 0, 1000, 1000);
     		g.drawImage(Sprite.spriteBuffer[i].image,Sprite.spriteBuffer[i].x, Sprite.spriteBuffer[i].y, Sprite.spriteBuffer[i].width, Sprite.spriteBuffer[i].height, null);
     	}
     }
@@ -20,9 +23,11 @@ public class Canvas {
         frame.setVisible(true);
         frame.setSize(width, height);
         frame.setTitle(title);
+        frame.setBackground(Color.RED);
         panel = new JPanel() {
             public void paintComponent(Graphics g) {
                 super.paintComponent(g);
+               
                 repainter(g);
             }
         };
