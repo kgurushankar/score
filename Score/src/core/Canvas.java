@@ -12,12 +12,12 @@ public class Canvas {
     		g.drawImage(Sprite.spriteBuffer[i].image,Sprite.spriteBuffer[i].x, Sprite.spriteBuffer[i].y, Sprite.spriteBuffer[i].width, Sprite.spriteBuffer[i].height, null);
     	}
     }
-	public static void startCanvas() {
+	public Canvas(String title, int width, int height) {
         JFrame frame = new JFrame();
-       
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
-        frame.setSize(600, 400);
+        frame.setSize(width, height);
+        frame.setTitle(title);
         panel = new JPanel() {
             public void paintComponent(Graphics g) {
                 super.paintComponent(g);

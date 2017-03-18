@@ -6,7 +6,7 @@ import sprite.Sprite;
 public class Main {
 	/*This is the most unstable version of score. I wouldn't recommend using it!*/
 	public static void main(String[] args){
-		Canvas.startCanvas();
+		Canvas canvas = new Canvas("Demo",1000,1000);
 		Sprite sprite1 = new Sprite();
 		sprite1.width = 200;
 		sprite1.height = 200;
