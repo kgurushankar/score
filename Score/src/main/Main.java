@@ -15,8 +15,13 @@ public class Main {
 		Sprite sprite2 = new Sprite(500, 400, 200,200);
 		sleep(100);
 		while(true){
-			if(sprite1.clicked()){
-				sprite1.goTo(0, 0);
+			if(sprite1.mouseDown()){
+				while(sprite1.mouseDown()){
+					canvas.getMouse();
+					sprite1.goTo(canvas.x - sprite1.width/2, canvas.y - sprite1.height/2);
+					sleep(5);
+				}
+				
 			}
 			if(Listener.keypressed.equals("w")){
 				for(double t = 0; sprite1.y<=700 && !(sprite1.touching(sprite2)); t++){

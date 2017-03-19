@@ -73,7 +73,7 @@ public class Sprite {
 		}
 		return null;
 	}
-	public boolean clicked(){
+	public boolean mouseDown(){
 		int mousex = MouseInfo.getPointerInfo().getLocation().x;	    
 		int mousey = MouseInfo.getPointerInfo().getLocation().y;	
 		if(mousex < x || mousex > x + width || mousey< y || mousey> y + height){
