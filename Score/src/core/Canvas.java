@@ -1,6 +1,7 @@
 package core;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.MouseInfo;
 import java.awt.event.KeyEvent;
 
 import javax.swing.JFrame;
@@ -8,13 +9,10 @@ import javax.swing.JPanel;
 import sprite.Sprite;
 
 public class Canvas {
+	public int x;
+	public int y;
 	public JFrame frame;
 	public static JPanel panel;
-	private static void repainter (Graphics g){
-    	for(int i = 0; i < Sprite.spriteBuffer.length; i++){
-    		g.drawImage(Sprite.spriteBuffer[i].image,Sprite.spriteBuffer[i].x, Sprite.spriteBuffer[i].y, Sprite.spriteBuffer[i].width, Sprite.spriteBuffer[i].height, null);
-    	}
-    }
 	public Canvas(String title, int width, int height) {
         frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -34,6 +32,15 @@ public class Canvas {
         Listener.start(this); //Starts up the keylistener
         frame.repaint();
     }
+	private static void repainter (Graphics g){
+    	for(int i = 0; i < Sprite.spriteBuffer.length; i++){
+    		g.drawImage(Sprite.spriteBuffer[i].image,Sprite.spriteBuffer[i].x, Sprite.spriteBuffer[i].y, Sprite.spriteBuffer[i].width, Sprite.spriteBuffer[i].height, null);
+    	}
+    }
+	public void getMouse(){
+		x = MouseInfo.getPointerInfo().getLocation().x;	    
+		y = MouseInfo.getPointerInfo().getLocation().y;	    
+	}
 }
 
 
