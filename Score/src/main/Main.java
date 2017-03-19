@@ -15,6 +15,7 @@ public class Main {
 		Sprite sprite2 = new Sprite(500, 400, 200,200);
 		sleep(100);
 		while(true){
+			//Makes the sprite draggable
 			if(sprite1.mouseDown()){
 				while(sprite1.mouseDown()){
 					canvas.getMouse();
