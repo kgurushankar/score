@@ -33,7 +33,7 @@ public class Canvas {
         frame.repaint();
     }
 	private static void repainter (Graphics g){
-    	for(int i = 0; i < Sprite.spriteBuffer.length; i++){
+    	for(int i = Sprite.spriteBuffer.length-1; i >= 0; i--){
     		g.drawImage(Sprite.spriteBuffer[i].image,Sprite.spriteBuffer[i].x, Sprite.spriteBuffer[i].y, Sprite.spriteBuffer[i].width, Sprite.spriteBuffer[i].height, null);
     	}
     }

@@ -7,28 +7,33 @@ import core.Listener;
 public class Main {
 	/*Feel free to delete this file. It only exists for testing purposes!*/
 	public static void main(String[] args){
-		Canvas canvas = new Canvas("Demo",1000,1000);
-		Sprite sprite1 = new Sprite(500,100,100,100);
-		sprite1.addCostume("test2.jpg");
-		sprite1.width = 150;
-		sprite1.height = 150;
-		Sprite sprite2 = new Sprite(500, 400, 200,200);
-		sleep(100);
+		//This is a simple game where you have to bump into another cat
+		Sprite hero = new Sprite();
+		hero.addCostume("test2.jpg");
+		Sprite platform = new Sprite(600,600,300,100);
+		Sprite platform2 = new Sprite(300,200,300,100);
+		Sprite goal = new Sprite(300,100,100,100);
+		Sprite ground = new Sprite(0,900,1000,100);
+		//you might want to change the path to the floor and ground
+		platform.setCostume("C:\\tmp\\assets\\floor.jpg");
+		platform2.setCostume("C:\\tmp\\assets\\floor.jpg");
+		ground.setCostume("C:\\tmp\\assets\\floor.jpg");
+		Canvas canvas = new Canvas("Quick demo",1000,1000);
 		while(true){
-			//Makes the sprite draggable
-			if(sprite1.mouseDown()){
-				while(sprite1.mouseDown()){
-					canvas.getMouse();
-					sprite1.goTo(canvas.x - sprite1.width/2, canvas.y - sprite1.height/2);
-					sleep(5);
-				}
-				
+			//This is the main game script
+			if(hero.touching(goal)){
+				hero.goTo(0, 500);
 			}
-			if(Listener.keypressed.equals("w")){
-				for(double t = 0; sprite1.y<=700 && !(sprite1.touching(sprite2)); t++){
-					sprite1.y = sprite1.y - (int) (4*t - 3*t*t/20);
-					if(sprite1.y > 700){
-						sprite1.y = 700;
+			if(Listener.keypressed.equals("w")&&(hero.touching(ground)||hero.touching(platform)||hero.touching(platform2))){
+				int maxHeight = hero.y;
+				for(double t = 0; hero.y<=800; t++){
+					hero.y = hero.y - (int) (4*t - 3*t*t/20);
+					if(hero.y > maxHeight){
+						break;
+					}
+					maxHeight = hero.y;
+					if(hero.y > 800){
+						hero.y = 800;
 						break;
 					}
 					sleep(15);
@@ -36,11 +41,14 @@ public class Main {
 					
 				}
 			}
-			else if(sprite1.y<700){
-				for(double t = 0; sprite1.y<=700 && !sprite1.touching(sprite2); t++){
-					sprite1.y = sprite1.y - (int) (-3*t*t/20);
-					if(sprite1.y > 700){
-						sprite1.y = 700;
+			else if(!hero.touching(ground) && !hero.touching(platform) && !hero.touching(platform2)){
+				for(double t = 0; hero.y<=800; t++){
+					hero.y = hero.y - (int) (-3*t*t/20);
+					if(hero.y > 800){
+						hero.y = 800;
+						break;
+					}
+					if(hero.touching(platform)||hero.touching(platform2)){
 						break;
 					}
 					sleep(30);
@@ -49,24 +57,21 @@ public class Main {
 			}
 				
 			if(Listener.keypressed.equals("a")){
-				sprite1.nextCostume();
+				hero.nextCostume();
 				for(int i = 0; i < 35; i++){
-					sprite1.x-=1;
+					hero.x-=1;
 					sleep(1);
 				}
 			}
 			if(Listener.keypressed.equals("d")){
-				sprite1.nextCostume();
+				hero.nextCostume();
 				for(int i = 0; i < 35; i++){
-					sprite1.x+=1;
+					hero.x+=1;
 					sleep(1);
 				}
 			}
-			if(sprite1.touching(sprite2)){
-				sprite1.goTo(0, 0);
-			}
 			sleep(1);
-			//simplest physics
+			//So that you can see "smooth" animations
 			Canvas.panel.repaint();
 		}
 	}
