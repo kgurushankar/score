@@ -5,7 +5,7 @@ import sprite.Sprite;
 import core.Listener;
 
 public class Main {
-	/*This is the most unstable version of score. I wouldn't recommend using it!*/
+	/*Feel free to delete this file. It only exists for testing purposes!*/
 	public static void main(String[] args){
 		Canvas canvas = new Canvas("Demo",1000,1000);
 		Sprite sprite1 = new Sprite();
@@ -15,7 +15,6 @@ public class Main {
 		sleep(100);
 		while(true){
 			if(Listener.keypressed.equals("w")&&sprite1.y>=700){
-				sprite1.image = sprite1.readImage("jump.jpg");
 				for(double t = 0; sprite1.y<=700; t++){
 					sprite1.y = sprite1.y - (int) (4*t - 3*t*t/20);
 					if(sprite1.y > 700){
@@ -25,7 +24,6 @@ public class Main {
 					sleep(15);
 					Canvas.panel.repaint();
 				}
-				sprite1.image = sprite1.readImage("Scratch_Cat.png");
 			}
 			else if(sprite1.y<700){
 				for(double t = 0; sprite1.y<=700; t++){
