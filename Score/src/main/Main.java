@@ -1,16 +1,15 @@
 package main;
 import java.awt.Color;
+import java.awt.Font;
 
 import core.Canvas;
-import sprite.Rect;
 import sprite.Sprite;
-import sprite.Text;
 import core.Listener;
 
 public class Main {
 	/*Feel free to delete this file. It only exists for testing purposes!*/
 	public static void main(String[] args){
-		platformer();
+		dodge();
 	}
 	public static void dodge(){
 		Canvas canvas = new Canvas("Quick demo", 1000, 1000);
@@ -46,14 +45,22 @@ public class Main {
 		//This is a simple game where you have to bump into another cat
 		Sprite hero = new Sprite();
 		hero.addCostume("test2.jpg");
-		Sprite platform = new Sprite(600,600,300,100);
-		Sprite platform2 = new Sprite(300,200,400,100);
+		Sprite platform = new Sprite(Sprite.RECTANGLE);
+		platform.width = 300;
+		platform.height = 100;
+		platform.x = 600;
+		platform.y = 600;
+		Sprite platform2 = new Sprite(Sprite.RECTANGLE);
+		platform2.width = 300;
+		platform2.height = 100;
+		platform2.x = 300;
+		platform2.y = 200;
 		Sprite goal = new Sprite(300,100,100,100);
-		Sprite ground = new Sprite(0,900,1000,100);
-		//you might want to change the path to the floor and ground
-		platform.setCostume("C:\\tmp\\assets\\floor.jpg");
-		platform2.setCostume("C:\\tmp\\assets\\floor.jpg");
-		ground.setCostume("C:\\tmp\\assets\\floor.jpg");
+		Sprite ground = new Sprite(Sprite.RECTANGLE);
+		ground.width = 1000;
+		ground.height = 100;
+		ground.x = 0;
+		ground.y = 900;
 		Canvas canvas = new Canvas("Quick demo",1000,1000);
 		while(true){
 			//This is the main game script
@@ -121,13 +128,20 @@ public class Main {
 			//So that you can see "smooth" animations
 			Canvas.panel.repaint();
 		}
-		Rect fullscreen = new Rect(0,0,1000,1000);
-		fullscreen.color = Color.YELLOW;
-		Text loser = new Text("You won... but that was a dumb game.");
-		Text noPrizes = new Text("SO NO PRIZES!!");
-		loser.size = 25;
-		loser.goTo(400, 400);
-		noPrizes.goTo(400, 700);
+		Sprite background = new Sprite(Sprite.RECTANGLE);
+		background.x = 0;
+		background.y = 0;
+		background.width = 1000;
+		background.height = 1000;
+		background.color = Color.YELLOW;
+		Sprite.spriteBuffer[1] = background;
+		Sprite text = new Sprite(Sprite.TEXT);
+		text.x = 150;
+		text.y = 450;
+		text.font = new Font(Font.SANS_SERIF,Font.BOLD, 50);
+		text.color = Color.BLUE;
+		text.text = "You beat this stupid game!";
+		Sprite.spriteBuffer[0] = text;
 		Canvas.panel.repaint();
 		
 	}

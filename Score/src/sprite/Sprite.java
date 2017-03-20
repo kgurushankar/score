@@ -1,5 +1,7 @@
 package sprite;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.MouseInfo;
 import java.awt.event.KeyEvent;
@@ -10,6 +12,13 @@ import core.Canvas;
 import core.Listener;
 
 public class Sprite {
+	//Defaults
+	public static final int IMAGE = 0;
+	public static final int RECTANGLE = 1;
+	public static final int TEXT = 2;
+	
+	
+	
 	public static Sprite[] spriteBuffer = new Sprite[0];
 	public int x = 0;
 	public int y = 0;
@@ -18,9 +27,13 @@ public class Sprite {
 	public String path = "Scratch_Cat.png";
 	public Image image;
 	public Image[] costumes = new Image[1];
-	
+	public int type = IMAGE;
+	public Color color = Color.BLACK;
+	public Font font = new Font(Font.SANS_SERIF,Font.PLAIN,25);
+	public String text = "null";
 	private int imageLocation = 0;
 	/*Constructors and other stuff you don't care about*/
+	//For the image sprite, default!
 	public Sprite (){
 		spriteBuffer = util.main.push(spriteBuffer, this);
 		image = this.readImage(path);
@@ -34,6 +47,10 @@ public class Sprite {
 		spriteBuffer = util.main.push(spriteBuffer, this);
 		image = this.readImage(path);
 		costumes[0] = image;
+	}
+	public Sprite (int types){
+		type = types;
+		spriteBuffer = util.main.push(spriteBuffer, this);
 	}
 	public void goTo(int xpos, int ypos){
 		x = xpos;

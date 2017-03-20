@@ -4,11 +4,8 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.MouseInfo;
 import java.awt.event.KeyEvent;
-import sprite.Text;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
-import sprite.Rect;
 import sprite.Sprite;
 
 public class Canvas {
@@ -35,18 +32,20 @@ public class Canvas {
         Listener.start(this); //Starts up the keylistener
         frame.repaint();
     }
-	private static void repainter (Graphics g){
-    	for(int i = Rect.rectBuffer.length-1; i>=0; i--){
-    		g.setColor(Rect.rectBuffer[i].color);
-    		g.fillRect(Rect.rectBuffer[i].x, Rect.rectBuffer[i].y, Rect.rectBuffer[i].width, Rect.rectBuffer[i].height);
-    	}    	
+	private static void repainter (Graphics g){	
 		for(int i = Sprite.spriteBuffer.length-1; i >= 0; i--){
-    		g.drawImage(Sprite.spriteBuffer[i].image,Sprite.spriteBuffer[i].x, Sprite.spriteBuffer[i].y, Sprite.spriteBuffer[i].width, Sprite.spriteBuffer[i].height, null);
-    	}
-    	for(int i = Text.textBuffer.length-1; i>=0; i--){
-    		g.setColor(Text.textBuffer[i].color);
-    		g.setFont(new Font(Text.textBuffer[i].font, Text.textBuffer[i].style, Text.textBuffer[i].size));
-    		g.drawString(Text.textBuffer[i].text, Text.textBuffer[i].x, Text.textBuffer[i].y);
+    		if(Sprite.spriteBuffer[i].type == 1){
+    			g.setColor(Sprite.spriteBuffer[i].color);
+    			g.fillRect(Sprite.spriteBuffer[i].x, Sprite.spriteBuffer[i].y, Sprite.spriteBuffer[i].width, Sprite.spriteBuffer[i].height);
+    		}
+    		else if(Sprite.spriteBuffer[i].type == 2){
+    			g.setColor(Sprite.spriteBuffer[i].color);
+    			g.setFont(Sprite.spriteBuffer[i].font);
+    			g.drawString(Sprite.spriteBuffer[i].text, Sprite.spriteBuffer[i].x, Sprite.spriteBuffer[i].y);
+    		}
+    		else if(Sprite.spriteBuffer[i].type == 0){
+    			g.drawImage(Sprite.spriteBuffer[i].image,Sprite.spriteBuffer[i].x, Sprite.spriteBuffer[i].y, Sprite.spriteBuffer[i].width, Sprite.spriteBuffer[i].height, null);
+    		}
     	}
     }
 	public void getMouse(){
