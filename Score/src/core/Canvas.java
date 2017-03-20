@@ -1,11 +1,14 @@
 package core;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.MouseInfo;
 import java.awt.event.KeyEvent;
-
+import sprite.Text;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import sprite.Rect;
 import sprite.Sprite;
 
 public class Canvas {
@@ -33,8 +36,17 @@ public class Canvas {
         frame.repaint();
     }
 	private static void repainter (Graphics g){
-    	for(int i = Sprite.spriteBuffer.length-1; i >= 0; i--){
+    	for(int i = Rect.rectBuffer.length-1; i>=0; i--){
+    		g.setColor(Rect.rectBuffer[i].color);
+    		g.fillRect(Rect.rectBuffer[i].x, Rect.rectBuffer[i].y, Rect.rectBuffer[i].width, Rect.rectBuffer[i].height);
+    	}    	
+		for(int i = Sprite.spriteBuffer.length-1; i >= 0; i--){
     		g.drawImage(Sprite.spriteBuffer[i].image,Sprite.spriteBuffer[i].x, Sprite.spriteBuffer[i].y, Sprite.spriteBuffer[i].width, Sprite.spriteBuffer[i].height, null);
+    	}
+    	for(int i = Text.textBuffer.length-1; i>=0; i--){
+    		g.setColor(Text.textBuffer[i].color);
+    		g.setFont(new Font(Text.textBuffer[i].font, Text.textBuffer[i].style, Text.textBuffer[i].size));
+    		g.drawString(Text.textBuffer[i].text, Text.textBuffer[i].x, Text.textBuffer[i].y);
     	}
     }
 	public void getMouse(){

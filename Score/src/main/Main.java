@@ -1,6 +1,10 @@
 package main;
+import java.awt.Color;
+
 import core.Canvas;
+import sprite.Rect;
 import sprite.Sprite;
+import sprite.Text;
 import core.Listener;
 
 public class Main {
@@ -54,7 +58,7 @@ public class Main {
 		while(true){
 			//This is the main game script
 			if(hero.touching(goal)){
-				hero.goTo(0, 500);
+				break;
 			}
 			if(Listener.keypressed.equals("w")&&(hero.touching(ground)||hero.touching(platform)||hero.touching(platform2))){
 				int maxHeight = hero.y;
@@ -117,6 +121,15 @@ public class Main {
 			//So that you can see "smooth" animations
 			Canvas.panel.repaint();
 		}
+		Rect fullscreen = new Rect(0,0,1000,1000);
+		fullscreen.color = Color.YELLOW;
+		Text loser = new Text("You won... but that was a dumb game.");
+		Text noPrizes = new Text("SO NO PRIZES!!");
+		loser.size = 25;
+		loser.goTo(400, 400);
+		noPrizes.goTo(400, 700);
+		Canvas.panel.repaint();
+		
 	}
 	public static void sleep(int millis){
 		try {
