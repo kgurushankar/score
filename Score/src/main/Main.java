@@ -1,7 +1,4 @@
 package main;
-
-import javax.swing.JFrame;
-
 import core.Canvas;
 import sprite.Sprite;
 import core.Listener;
