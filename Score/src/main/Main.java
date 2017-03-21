@@ -70,6 +70,10 @@ public class Main {
 			}
 			if(Listener.keypressed.equals("w")&&(hero.touching(ground)||hero.touching(platform)||hero.touching(platform2))){
 				int maxHeight = hero.y;
+				hero.height = 90;
+				hero.setCostume("test2.jpg");
+				sleep(50);
+				hero.height = 110;
 				hero.goTo((int)((hero.x)+(velocity)*5), hero.y);
 				velocity = velocity*0.9;
 				for(double t = 0; hero.y<=800; t++){
@@ -89,6 +93,8 @@ public class Main {
 				}
 			}
 			else if(!hero.touching(ground) && !hero.touching(platform) && !hero.touching(platform2)){
+				hero.height = 100;
+				hero.setCostume("Scratch_Cat.png");
 				for(double t = 0; hero.y<=800; t++){
 					hero.goTo((int)((hero.x)+(velocity)*5), hero.y);
 					hero.y = hero.y - (int) (-3*t*t/20);
@@ -117,17 +123,18 @@ public class Main {
 			}
 			if(Listener.keypressed.equals("a")){
 				if(hero.touching(platform)||hero.touching(platform2)||hero.touching(ground)){
-					velocity = -1;
+					velocity = -4;
+					sleep(60);
 				}
 			}
 			if(Listener.keypressed.equals("d")){
 				if(hero.touching(platform)||hero.touching(platform2)||hero.touching(ground)){
-					velocity = 1;
+					velocity = 4;
 				}
 			}
 			//Velocity handler
 			hero.goTo((int)((hero.x)+(velocity)*5), hero.y);
-			velocity = velocity*0.8 + 0.001;
+			velocity = velocity*0.5 + 0.001;
 			sleep(5);
 			if(Math.abs(velocity)>0.5){
 				sleep(45);

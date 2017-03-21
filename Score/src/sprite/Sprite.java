@@ -17,8 +17,6 @@ public class Sprite {
 	public static final int RECTANGLE = 1;
 	public static final int TEXT = 2;
 	
-	
-	
 	public static Sprite[] spriteBuffer = new Sprite[0];
 	public int x = 0;
 	public int y = 0;
