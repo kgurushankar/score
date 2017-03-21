@@ -130,8 +130,8 @@ public class Main {
 			velocity = velocity*0.8 + 0.001;
 			sleep(5);
 			if(Math.abs(velocity)>0.5){
+				sleep(45);
 				hero.nextCostume();
-				sleep(15);
 			}
 			//So that you can see "smooth" animations
 			Canvas.panel.repaint();
