@@ -9,7 +9,7 @@ import core.Listener;
 public class Main {
 	/*Feel free to delete this file. It only exists for testing purposes!*/
 	public static void main(String[] args){
-		dodge();
+		platformer();
 	}
 	public static void dodge(){
 		Canvas canvas = new Canvas("Quick demo", 1000, 1000);
@@ -61,6 +61,7 @@ public class Main {
 		ground.height = 100;
 		ground.x = 0;
 		ground.y = 900;
+		double velocity = 0;
 		Canvas canvas = new Canvas("Quick demo",1000,1000);
 		while(true){
 			//This is the main game script
@@ -69,7 +70,10 @@ public class Main {
 			}
 			if(Listener.keypressed.equals("w")&&(hero.touching(ground)||hero.touching(platform)||hero.touching(platform2))){
 				int maxHeight = hero.y;
+				hero.goTo((int)((hero.x)+(velocity)*5), hero.y);
+				velocity = velocity*0.9;
 				for(double t = 0; hero.y<=800; t++){
+					hero.goTo((int)((hero.x)+(velocity)*5), hero.y);
 					hero.y = hero.y - (int) (4*t - 3*t*t/20);
 					if(hero.y > maxHeight){
 						break;
@@ -86,6 +90,7 @@ public class Main {
 			}
 			else if(!hero.touching(ground) && !hero.touching(platform) && !hero.touching(platform2)){
 				for(double t = 0; hero.y<=800; t++){
+					hero.goTo((int)((hero.x)+(velocity)*5), hero.y);
 					hero.y = hero.y - (int) (-3*t*t/20);
 					if(hero.y > 800){
 						hero.y = 800;
@@ -111,20 +116,23 @@ public class Main {
 				}
 			}
 			if(Listener.keypressed.equals("a")){
-				hero.nextCostume();
-				for(int i = 0; i < 35; i++){
-					hero.x-=1;
-					sleep(1);
+				if(hero.touching(platform)||hero.touching(platform2)||hero.touching(ground)){
+					velocity = -1;
 				}
 			}
 			if(Listener.keypressed.equals("d")){
-				hero.nextCostume();
-				for(int i = 0; i < 35; i++){
-					hero.x+=1;
-					sleep(1);
+				if(hero.touching(platform)||hero.touching(platform2)||hero.touching(ground)){
+					velocity = 1;
 				}
 			}
-			sleep(1);
+			//Velocity handler
+			hero.goTo((int)((hero.x)+(velocity)*5), hero.y);
+			velocity = velocity*0.8 + 0.001;
+			sleep(5);
+			if(Math.abs(velocity)>0.5){
+				hero.nextCostume();
+				sleep(15);
+			}
 			//So that you can see "smooth" animations
 			Canvas.panel.repaint();
 		}
