@@ -9,32 +9,43 @@ import javax.swing.JPanel;
 import sprite.Sprite;
 
 public class Canvas{
-	static Graphics2D graphics;
+	//Stuff that moves around
+	private static JPanel panel;
+	private static Graphics2D graphics;
+	public JFrame frame;
 	public Canvas (String title, int width, int height){
-		JFrame frame = new JFrame();
+		frame = new JFrame();
 		frame.setTitle(title);
 		frame.setSize(width, height);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
-		JPanel panel = new JPanel() {
+		panel = new JPanel() {
             public void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 graphics = (Graphics2D) g;
+                
+                render(g);
             }
         };
-		graphics = (Graphics2D) frame.getGraphics();
+		frame.add(panel);
+		frame.validate();
+        graphics = (Graphics2D) frame.getGraphics();
 		update();
 	}
-	public void update(){
+	
+	//Important internal methods
+	private void render(Graphics g){
 		Sprite[] render = Sprite.renderBuffer;
 		for(int i = 0; i < render.length; i++){
-			if(render[i].type == Sprite.IMAGE){
+			if(render[i].type == Sprite.IMAGE && render[i].visable){
 				graphics.drawImage(render[i].image, render[i].x, render[i].y, render[i].width, render[i].height, null);
 			}
-			else if(render[i].type == Sprite.RECTANGLE){
+			else if(render[i].type == Sprite.RECTANGLE  && render[i].visable){
+				graphics.setColor(render[i].color);
 				graphics.fillRect(render[i].x, render[i].y, render[i].width, render[i].height);
 			}
-			else if(render[i].type == Sprite.TEXT){
+			else if(render[i].type == Sprite.TEXT  && render[i].visable){
+				graphics.setColor(render[i].color);
 				graphics.setFont(render[i].font);
 				graphics.drawString(render[i].text, render[i].x, render[i].y);
 			}
@@ -42,5 +53,8 @@ public class Canvas{
 				System.err.println("Invalid type.");
 			}
 		}
+	}
+	public static void update(){
+		panel.repaint();
 	}
 }

@@ -8,6 +8,9 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import core.Canvas;
+import core.Mouse;
+
 public class Sprite {
 	//Reference points
 	public static final int IMAGE = 0, RECTANGLE = 1, TEXT = 2;
@@ -17,13 +20,15 @@ public class Sprite {
 	
 	//Core values for each sprite
 	public int x = 0, y = 0, width = 100, height = 100, type = IMAGE;
-	
+	public double angle = 0;
+	public boolean visable = true;
 	//Other values that depend on type
 	//IMAGE
 	public String path = "Scratch_Cat.png";
 	public Image image = readImage(path);
 	public Image[] costumes = {image};
 	
+	private int costumeNumber = 0;
 	//Rectangle
 	public Color color = Color.BLACK;
 	
@@ -55,4 +60,105 @@ public class Sprite {
 		}
 		return null;
 	}
+	
+	//Sprite methods
+	
+	/*Motion methods
+	 * 
+	 * Since the score library is heavily based on Scratch, many of the methods line up
+	 * These methods are categorized by Scratch as motion methods
+	 */
+	public void moveSteps(int steps){
+		x = (int) Math.ceil(x + steps * Math.cos(Math.toRadians((double) angle)));
+		y = (int) Math.ceil(y - steps * Math.sin(Math.toRadians((double)angle)));
+		Canvas.update();
+	}
+	public void turndegrees(int degrees){
+		angle = angle + degrees;
+	}
+	public void pointInDirection(int degrees){
+		angle = degrees;
+	}
+	public void pointTowardsMouse(){
+		if(Mouse.getx() > x && Mouse.gety() < y){
+			angle =  Math.toDegrees(((double)(y - Mouse.gety()))/(Mouse.getx() - x));
+		}
+		else if(Mouse.getx() < x && Mouse.gety() < y){
+			angle = 180 - Math.toDegrees(((double)(y - Mouse.gety()))/(x - Mouse.getx()));
+		}
+		else if(Mouse.getx() < x && Mouse.gety() > y){
+			angle = 180 + Math.toDegrees(((double)(Mouse.gety() - y))/(x - Mouse.getx()));
+		}
+		else if(Mouse.getx() > x && Mouse.gety() > y){
+			angle = Math.toDegrees(((double)(Mouse.gety() - y))/(x - Mouse.getx()));
+		}
+	}
+	public void pointTowardsSprite(Sprite other){
+		if(other.x > x && other.y < y){
+			angle =  Math.toDegrees(((double)(y - other.y))/(other.x - x));
+		}
+		else if(other.x < x && other.y < y){
+			angle = 180 - Math.toDegrees(((double)(y - other.y))/(x - other.x));
+		}
+		else if(other.x < x && other.y > y){
+			angle = 180 + Math.toDegrees(((double)(other.y - y))/(x - other.x));
+		}
+		else if(other.x > x && other.y > y){
+			angle = Math.toDegrees(((double)(other.y - y))/(x - other.x));
+		}
+	}
+	public void goTo(int xCoordinate, int yCoordinate){
+		x = xCoordinate;
+		y = yCoordinate;
+		Canvas.update();
+	}
+	public void goToMouse(){
+		x = Mouse.getx();
+		y = Mouse.gety();
+		Canvas.update();
+	}
+	public void changex(int value){
+		x += value;
+		Canvas.update();
+	}
+	public void changey(int value){
+		y += value;
+		Canvas.update();
+	}
+	
+	//Looks blocks
+	public void visable(boolean visability){
+		visable = visability;
+		Canvas.update();
+	}
+	
+	public void switchCostume(int costumeNumber){
+		image = costumes[costumeNumber];
+		Canvas.update();
+	}
+	
+	public void nextCostume(){
+		if(costumeNumber + 1 < costumes.length){
+			costumeNumber++;
+			switchCostume(costumeNumber);
+		}
+		else{
+			costumeNumber = 0;
+			switchCostume(costumeNumber);
+		}
+	}
+	
+	public void changeSizeBy(double percent){
+		width = (int) (width * percent / 100);
+		height = (int) (height * percent / 100);
+		Canvas.update();
+	}
+	
+	public void setSizeTo(int newWidth, int newHeight){
+		width = newWidth;
+		height = newHeight;
+		Canvas.update();
+	}
+	
+	
 }
