@@ -8,21 +8,17 @@ import core.Canvas;
 public class Main {
 
 	public static void  main(String[] args) throws InterruptedException {
-		Canvas canvas = new Canvas("TEST",1000,1000);
-		Sprite test = new Sprite(Sprite.RECTANGLE);
-		test.color = Color.BLUE;
+		Canvas canvas = new Canvas("test", 1000,1000);
+		Sprite test1 = new Sprite(Sprite.RECTANGLE);
+		test1.goTo(100, 100);
+		test1.color = Color.RED;
 		Sprite test2 = new Sprite(Sprite.RECTANGLE);
-		test.x = 500;
-		test.y = 500;
-		test2.x = 300;
-		test2.y = 300;
-		Canvas.update();
-		while(true){
-			test.pointTowardsSprite(test2);
-			test2.goToMouse();
-			test.moveSteps(4);
-			Thread.sleep(10);
-		}
+		test2.goTo(100, 100);
+		test2.color = Color.BLUE;
+		Sprite test3 = new Sprite(Sprite.RECTANGLE);
+		test3.color = Color.YELLOW;
+		test3.goTo(100,100);
+		test3.setLayerTo(0);
 	}
 
 }

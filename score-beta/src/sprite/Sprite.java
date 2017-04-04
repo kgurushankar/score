@@ -159,6 +159,15 @@ public class Sprite {
 		height = newHeight;
 		Canvas.update();
 	}
-	
-	
+	public void setLayerTo(int newLayer) {
+	    Sprite last = renderBuffer[renderBuffer.length-1];
+
+	    // Copy sub-array starting at newLayer to newLayer+1
+	    System.arraycopy(renderBuffer, newLayer, renderBuffer, newLayer + 1, renderBuffer.length - newLayer - 1);
+
+	    renderBuffer[newLayer] = last;
+	}
+	public void sendToFront() {
+	   setLayerTo(renderBuffer.length-1);
+	}
 }
