@@ -2,6 +2,7 @@ package core;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -42,6 +43,7 @@ public class Canvas{
 				graphics.drawImage(render[i].image, render[i].x, render[i].y, render[i].width, render[i].height, null);
 			}
 			else if(render[i].type == Sprite.RECTANGLE  && render[i].visable){
+				
 				graphics.setColor(render[i].color);
 				graphics.fillRect(render[i].x, render[i].y, render[i].width, render[i].height);
 			}
