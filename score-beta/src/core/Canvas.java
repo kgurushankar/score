@@ -2,7 +2,11 @@ package core;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
+import java.awt.Shape;
 import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
+import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -40,12 +44,27 @@ public class Canvas{
 		Sprite[] render = Sprite.renderBuffer;
 		for(int i = 0; i < render.length; i++){
 			if(render[i].type == Sprite.IMAGE && render[i].visable){
-				graphics.drawImage(render[i].image, render[i].x, render[i].y, render[i].width, render[i].height, null);
+				// The required drawing location
+				int drawLocationX = render[i].x;
+				int drawLocationY = render[i].y;
+				// Rotation information
+				double rotationRequired = Math.toRadians (-render[i].angle);
+				double locationX = render[i].width / 2;
+				double locationY = render[i].height / 2;
+				AffineTransform tx = AffineTransform.getRotateInstance(rotationRequired, locationX, locationY);
+				AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
+
+				// Drawing the rotated image at the required drawing locations
+				graphics.drawImage(op.filter((BufferedImage) render[i].image, null), drawLocationX, drawLocationY, null);
 			}
 			else if(render[i].type == Sprite.RECTANGLE  && render[i].visable){
 				
 				graphics.setColor(render[i].color);
-				graphics.fillRect(render[i].x, render[i].y, render[i].width, render[i].height);
+				Rectangle original = new Rectangle(render[i].x, render[i].y, render[i].width, render[i].height);
+				AffineTransform transform = new AffineTransform();
+				transform.rotate(Math.toRadians(-render[i].angle), render[i].x + render[i].width/2, render[i].y + render[i].height/2);
+				Shape rectangle = transform.createTransformedShape(original);
+				graphics.fill(rectangle);
 			}
 			else if(render[i].type == Sprite.TEXT  && render[i].visable){
 				graphics.setColor(render[i].color);
@@ -72,4 +91,7 @@ public class Canvas{
 	public boolean mouseDown(){
 		return Mouse.mouseDown;
 	}
+	
+	
+	
 }

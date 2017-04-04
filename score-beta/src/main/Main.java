@@ -18,9 +18,11 @@ public class Main {
 			}
 			if(Keyboard.keyPressed(37)){
 				test.angle = test.angle + 10;
+				canvas.update();
 			}
 			if(Keyboard.keyPressed(39)){
 				test.angle = test.angle - 10;
+				canvas.update();
 			}
 			Thread.sleep(100);
 		}
