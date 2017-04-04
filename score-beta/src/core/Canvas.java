@@ -27,6 +27,7 @@ public class Canvas{
                 render(g);
             }
         };
+        Keyboard.start(this);
 		frame.add(panel);
 		frame.validate();
         graphics = (Graphics2D) frame.getGraphics();
@@ -56,5 +57,17 @@ public class Canvas{
 	}
 	public static void update(){
 		panel.repaint();
+	}
+	
+	//Sensing
+	public boolean keypressed(int keycode){
+		if(util.main.search(Keyboard.keyspressed, Integer.toString(keycode))){
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean mouseDown(){
+		return Mouse.mouseDown;
 	}
 }

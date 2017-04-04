@@ -28,7 +28,7 @@ public class Sprite {
 	public Image image = readImage(path);
 	public Image[] costumes = {image};
 	
-	private int costumeNumber = 0;
+	public int costumeNumber = 0;
 	//Rectangle
 	public Color color = Color.BLACK;
 	
@@ -169,5 +169,22 @@ public class Sprite {
 	}
 	public void sendToFront() {
 	   setLayerTo(renderBuffer.length-1);
+	}
+	
+	//Sensing
+	
+	public boolean touchingMouse(){
+		if(Mouse.getx()<x + width && Mouse.getx() > x){
+			if(Mouse.gety()<y + height && Mouse.gety() > y){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public int distanceToMousePointer(){
+		int xpos = Mouse.getx() - x;
+		int ypos = Mouse.gety() - y;
+		return (int) Math.sqrt(xpos * xpos + ypos * ypos);
 	}
 }
