@@ -21,7 +21,7 @@ public class Sprite {
 	//Core values for each sprite
 	public int x = 0, y = 0, width = 100, height = 100, type = IMAGE;
 	public double angle = 0;
-	public boolean visable = true;
+	public boolean visible = true;
 	//Other values that depend on type
 	//IMAGE
 	public String path = "Scratch_Cat.png";
@@ -127,8 +127,8 @@ public class Sprite {
 	}
 	
 	//Looks blocks
-	public void visable(boolean visability){
-		visable = visability;
+	public void visible(boolean visability){
+		visible = visability;
 		Canvas.update();
 	}
 	

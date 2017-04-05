@@ -43,7 +43,7 @@ public class Canvas{
 	private void render(Graphics g){
 		Sprite[] render = Sprite.renderBuffer;
 		for(int i = 0; i < render.length; i++){
-			if(render[i].type == Sprite.IMAGE && render[i].visable){
+			if(render[i].type == Sprite.IMAGE && render[i].visible){
 				// The required drawing location
 				int drawLocationX = render[i].x;
 				int drawLocationY = render[i].y;
@@ -57,7 +57,7 @@ public class Canvas{
 				// Drawing the rotated image at the required drawing locations
 				graphics.drawImage(op.filter((BufferedImage) render[i].image, null), drawLocationX, drawLocationY, null);
 			}
-			else if(render[i].type == Sprite.RECTANGLE  && render[i].visable){
+			else if(render[i].type == Sprite.RECTANGLE  && render[i].visible){
 				
 				graphics.setColor(render[i].color);
 				Rectangle original = new Rectangle(render[i].x, render[i].y, render[i].width, render[i].height);
@@ -66,13 +66,10 @@ public class Canvas{
 				Shape rectangle = transform.createTransformedShape(original);
 				graphics.fill(rectangle);
 			}
-			else if(render[i].type == Sprite.TEXT  && render[i].visable){
+			else if(render[i].type == Sprite.TEXT  && render[i].visible){
 				graphics.setColor(render[i].color);
 				graphics.setFont(render[i].font);
 				graphics.drawString(render[i].text, render[i].x, render[i].y);
-			}
-			else{
-				System.err.println("Invalid type.");
 			}
 		}
 	}
