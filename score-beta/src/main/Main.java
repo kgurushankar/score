@@ -45,6 +45,10 @@ public class Main {
 		defender.color = Color.RED;
 		defender.goTo(100, 450);
 		
+		Sprite goalie = new Sprite(Sprite.RECTANGLE);
+		goalie.color = Color.RED;
+		goalie.setSizeTo(200, 200);
+		goalie.goTo(0, 450);
 		canvas.update();
 		long timekeeper = 0;
 		while(stage == 1){
@@ -59,23 +63,26 @@ public class Main {
 				hero.angle = hero.angle - 5;
 				canvas.update();
 			}
-			if(timekeeper%50 == 0){
+			if(timekeeper%55 == 0){
 				timekeeper = 0;
 				defender.pointTowardsSprite(hero);
 				defender.angle += 10;
 			}
 			defender.moveSteps(7);
 			Thread.sleep(20);
-			if(	   (Math.abs(defender.x - hero.x) < 140) 
-				&& (Math.abs(defender.y - hero.y) < 140)){
+			if(	   (Math.abs(defender.x + 50 - hero.x) < 144) 
+				&& (Math.abs(defender.y + 50 - hero.y) < 144)){
 				stage = -1;
 			}
 			if(hero.x <= 10){
 				stage = 2;
 			}
+			goalie.pointTowardsSprite(hero);
+			goalie.moveSteps(3);
 			timekeeper++;
 		}
 		if(stage == -1){
+			goalie.visible = false;
 			defender.goTo(hero.x, hero.y);
 			text.visible = true;
 			text.text = "TACKLED!!";
@@ -91,6 +98,7 @@ public class Main {
 			}
 		}
 		if(stage == 2){
+			goalie.visible = false;
 			hero.angle = 0;
 			hero.goTo(-20, hero.y);
 			text.visible = true;
