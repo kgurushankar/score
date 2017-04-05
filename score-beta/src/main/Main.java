@@ -57,12 +57,12 @@ public class Main {
 				hero.angle = hero.angle - 5;
 				canvas.update();
 			}
-			if(timekeeper%5 == 0){
+			if(timekeeper%50 == 0){
 				timekeeper = 0;
 				defender.pointTowardsSprite(hero);
 				defender.angle += 10;
 			}
-			defender.moveSteps(3);
+			defender.moveSteps(7);
 			Thread.sleep(20);
 			if(	   (Math.abs(defender.x - hero.x) < 140) 
 				&& (Math.abs(defender.y - hero.y) < 140)){
