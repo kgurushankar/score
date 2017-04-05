@@ -8,8 +8,10 @@ import core.Canvas;
 import core.Keyboard;
 
 public class Main {
-
-	public static void  main(String[] args) throws InterruptedException {
+	public static void main(String[] args){
+		test();
+	}
+	public static void test() throws InterruptedException {
 		Canvas canvas = new Canvas("test", 1000,1000);
 		int stage = 0;
 		//Title screen
