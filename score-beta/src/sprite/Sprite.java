@@ -24,7 +24,7 @@ public class Sprite {
 	public boolean visible = true;
 	//Other values that depend on type
 	//IMAGE
-	public String path = "Scratch_Cat.png";
+	public String path = "";
 	public Image image = readImage(path);
 	public Image[] costumes = {image};
 	
