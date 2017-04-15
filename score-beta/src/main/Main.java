@@ -24,6 +24,12 @@ public class Main {
 		text.text = "PRESS SPACE TO START";
 		text.font = new Font(Font.SANS_SERIF, Font.BOLD, 30);
 		text.goTo(300, 475);
+		
+		ExtensionTester test1 = new ExtensionTester(Sprite.RECTANGLE);
+		test1.goTo(500, 500);
+		test1.color = Color.RED;
+		
+		
 		while(stage == 0){
 			if(Keyboard.keyPressed(32)){
 				stage = 1;
