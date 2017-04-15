@@ -7,6 +7,7 @@ import java.awt.Shape;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -41,35 +42,36 @@ public class Canvas{
 	
 	//Important internal methods
 	private void render(Graphics g){
-		Sprite[] render = Sprite.renderBuffer;
-		for(int i = 0; i < render.length; i++){
-			if(render[i].type == Sprite.IMAGE && render[i].visible){
+		ArrayList render = Sprite.renderBuffer;
+		for(int i = 0; i < render.size(); i++){
+			Sprite current = (Sprite) render.get(i);
+			if(current.type == Sprite.IMAGE && current.visible){
 				// The required drawing location
-				int drawLocationX = render[i].x;
-				int drawLocationY = render[i].y;
+				int drawLocationX = current.x;
+				int drawLocationY = current.y;
 				// Rotation information
-				double rotationRequired = Math.toRadians (-render[i].angle);
-				double locationX = render[i].width / 2;
-				double locationY = render[i].height / 2;
+				double rotationRequired = Math.toRadians (-current.angle);
+				double locationX = current.width / 2;
+				double locationY = current.height / 2;
 				AffineTransform tx = AffineTransform.getRotateInstance(rotationRequired, locationX, locationY);
 				AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
 
 				// Drawing the rotated image at the required drawing locations
-				graphics.drawImage(op.filter((BufferedImage) render[i].image, null), drawLocationX, drawLocationY, null);
+				graphics.drawImage(op.filter((BufferedImage) current.image, null), drawLocationX, drawLocationY, null);
 			}
-			else if(render[i].type == Sprite.RECTANGLE  && render[i].visible){
+			else if(current.type == Sprite.RECTANGLE  && current.visible){
 				
-				graphics.setColor(render[i].color);
-				Rectangle original = new Rectangle(render[i].x, render[i].y, render[i].width, render[i].height);
+				graphics.setColor(current.color);
+				Rectangle original = new Rectangle(current.x, current.y, current.width, current.height);
 				AffineTransform transform = new AffineTransform();
-				transform.rotate(Math.toRadians(-render[i].angle), render[i].x + render[i].width/2, render[i].y + render[i].height/2);
+				transform.rotate(Math.toRadians(-current.angle), current.x + current.width/2, current.y + current.height/2);
 				Shape rectangle = transform.createTransformedShape(original);
 				graphics.fill(rectangle);
 			}
-			else if(render[i].type == Sprite.TEXT  && render[i].visible){
-				graphics.setColor(render[i].color);
-				graphics.setFont(render[i].font);
-				graphics.drawString(render[i].text, render[i].x, render[i].y);
+			else if(current.type == Sprite.TEXT  && current.visible){
+				graphics.setColor(current.color);
+				graphics.setFont(current.font);
+				graphics.drawString(current.text, current.x, current.y);
 			}
 		}
 	}

@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
@@ -12,16 +13,18 @@ import core.Canvas;
 import core.Mouse;
 
 public class Sprite {
+	@SuppressWarnings("unchecked")
 	//Reference points
 	public static final int IMAGE = 0, RECTANGLE = 1, TEXT = 2;
 	
 	//Required static
-	public static Sprite[] renderBuffer  = new Sprite[0];
+	public static ArrayList renderBuffer  = new ArrayList();
 	
 	//Core values for each sprite
 	public int x = 0, y = 0, width = 100, height = 100, type = IMAGE;
 	public double angle = 0;
 	public boolean visible = true;
+	private int layer = 0;
 	//Other values that depend on type
 	//IMAGE
 	public String path = "test.png";
@@ -35,18 +38,23 @@ public class Sprite {
 	//Font
 	public Font font = new Font(Font.SANS_SERIF,Font.PLAIN,25);
 	public String text = "Sample text";
+
 	public Sprite(){
-		renderBuffer = util.main.push(renderBuffer, this);
+		renderBuffer.add(this);
+		layer = renderBuffer.size()-1;
 	}
 	public Sprite(int spriteType, int xpos, int ypos){
 		type = spriteType;
 		x = xpos;
 		y = ypos;
-		renderBuffer = util.main.push(renderBuffer, this);
+		renderBuffer.add(this);
+		layer = renderBuffer.size()-1;
 	}
+	
 	public Sprite (int types){
 		type = types;
-		renderBuffer = util.main.push(renderBuffer, this);
+		renderBuffer.add(this);
+		layer = renderBuffer.size()-1;
 	}
 	
 	//static methods
@@ -160,15 +168,24 @@ public class Sprite {
 		Canvas.update();
 	}
 	public void setLayerTo(int newLayer) {
-	    Sprite last = renderBuffer[renderBuffer.length-1];
-
-	    // Copy sub-array starting at newLayer to newLayer+1
-	    System.arraycopy(renderBuffer, newLayer, renderBuffer, newLayer + 1, renderBuffer.length - newLayer - 1);
-
-	    renderBuffer[newLayer] = last;
+		ArrayList temp = new ArrayList();
+		for(int i = 0; i < layer; i++){
+			temp.add(renderBuffer.get(i));
+		}
+		for(int i = layer + 1; i < newLayer; i++){
+			Sprite casted = (Sprite) renderBuffer.get(i);
+			casted.layer--;
+			temp.add(casted);
+		}
+		layer = newLayer;
+		temp.add(this);
+		for(int i = newLayer + 1; i < renderBuffer.size() - 1; i++){
+			temp.add(renderBuffer.get(i));
+		}
+		renderBuffer = temp;
 	}
 	public void sendToFront() {
-	   setLayerTo(renderBuffer.length-1);
+	   setLayerTo(renderBuffer.size()-1);
 	}
 	
 	//Sensing
