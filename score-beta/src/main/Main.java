@@ -15,7 +15,7 @@ public class Main {
 		Canvas canvas = new Canvas("test", 1000,1000);
 		int stage = 0;
 		//Title screen
-		Sprite background = new Sprite(Sprite.RECTANGLE);
+		Sprite background = new Sprite(Sprite.IMAGE);
 		//Starting screen
 		background.setSizeTo(1000, 1000);
 		background.color = Color.YELLOW;

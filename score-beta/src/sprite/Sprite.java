@@ -3,11 +3,15 @@ package sprite;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 import core.Canvas;
 import core.Mouse;
@@ -57,8 +61,8 @@ public class Sprite {
 		layer = renderBuffer.size()-1;
 	}
 	
-	//static methods
-	public static Image readImage(String path){
+	//generic methods
+	public Image readImage(String path){
 		try {
 		    File pathToFile = new File(path);
 		    Image out = ImageIO.read(pathToFile);
@@ -68,6 +72,8 @@ public class Sprite {
 		}
 		return null;
 	}
+	
+	
 	
 	//Sprite methods
 	
