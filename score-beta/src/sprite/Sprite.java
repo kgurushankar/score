@@ -17,7 +17,6 @@ import core.Canvas;
 import core.Mouse;
 
 public class Sprite {
-	@SuppressWarnings("unchecked")
 	//Reference points
 	public static final int IMAGE = 0, RECTANGLE = 1, TEXT = 2;
 	
@@ -31,7 +30,7 @@ public class Sprite {
 	private int layer = 0;
 	//Other values that depend on type
 	//IMAGE
-	public String path = "test.png";
+	public String path = "/test.png";
 	public Image image = readImage(path);
 	public Image[] costumes = {image};
 	
@@ -79,9 +78,10 @@ public class Sprite {
 	
 	/*Motion methods
 	 * 
-	 * Since the score library is heavily based on Scratch, many of the methods line up
+	 * Since the score library is heavily based on Scratch, many of the methods share similar names as Scratch blocks
 	 * These methods are categorized by Scratch as motion methods
 	 */
+	
 	public void moveSteps(int steps){
 		x = (int) Math.ceil(x + steps * Math.cos(Math.toRadians((double) angle)));
 		y = (int) Math.ceil(y - steps * Math.sin(Math.toRadians((double)angle)));
