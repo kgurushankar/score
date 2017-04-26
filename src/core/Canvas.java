@@ -98,6 +98,13 @@ public class Canvas{
 		return Mouse.mouseDown;
 	}
 	
+	/**@author kgurushankar*/
+	public void toggleResizable(){
+		frame.setResizable(!(frame.isResizeable()));
+	}
 	
-	
+	/**@author kgurushankar*/
+	public void toggleResizable(boolean resizable){
+		frame.setResizable(resizable);
+	}
 }
