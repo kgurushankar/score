@@ -1,5 +1,6 @@
 package core;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -73,6 +74,12 @@ public class Canvas{
 				graphics.setFont(current.font);
 				graphics.drawString(current.text, current.x, current.y);
 			}
+			graphics.setColor(Color.GREEN);
+			graphics.fillOval(107, 175, 115, 50);
+			
+			graphics.setColor(Color.ORANGE);
+			graphics.drawOval(600, 10, 100, 100);
+			
 		}
 	}
 	public static void update(){
